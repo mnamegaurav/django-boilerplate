@@ -1,0 +1,13 @@
+{% extends 'admin/base.html' %}
+{% load static %}
+
+{% block extrahead %}
+{% endblock %}
+
+{% block extrajs %}
+<script>
+    $(document).ready(function () {
+        $(".sidebar .nav-link.active").focus();
+    });
+</script>
+{% endblock %}

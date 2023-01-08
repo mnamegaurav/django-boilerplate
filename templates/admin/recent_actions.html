@@ -1,0 +1,64 @@
+{% load i18n static log jazzmin %}
+{% get_jazzmin_ui_tweaks as jazzmin_ui %}
+
+<div class="col-lg-3 col-12">
+    <div id="content-related">
+        <div class="module" id="recent-actions-module">
+            <h4 class="mb-3">{% trans 'Recent actions' %}</h4>
+            {% get_admin_log 6 as admin_log for_user user %}
+            {% if not admin_log %}
+                <p>{% trans 'None available' %}</p>
+            {% else %}
+                <div class="timeline">
+                    {% for entry in admin_log %}
+                        <div>
+                            {% if entry.is_change %}
+                                <i class="fas fa-edit bg-gray text-xs"></i>
+                            {% elif entry.is_deletion %}
+                                <i class="fas fa-trash bg-danger text-xs"></i>
+                            {% elif entry.is_addition %}
+                                <i class="fas fa-plus-circle bg-primary text-xs"></i>
+                            {% endif %}
+
+                            <div class="timeline-item">
+                                <span class="time"><i class="fas fa-clock"></i> {% blocktrans with timesince=entry.action_time|timesince %}{{ timesince }} ago{% endblocktrans %}</span>
+                                <h3 class="timeline-header no-border">
+                                    {% if entry.is_deletion or not entry.get_admin_url %}
+                                        {{ entry.object_repr }}
+                                    {% else %}
+                                        <a href="{{ entry.get_admin_url }}">{{ entry.object_repr }}</a>
+                                    {% endif %}
+
+                                    {% if entry.model %}
+                                        <span class="mini quiet">
+                                            {% filter capfirst %}
+                                                {{ entry.model }}
+                                            {% endfilter %}
+                                        </span>
+                                    {% endif %}
+                                </h3>
+                                {% if not entry.is_deletion %}
+                                    <div class="timeline-body">
+                                        {% if entry.is_addition %}
+                                            {{ entry }}
+                                        {% else %}
+                                            <ul style="list-style: none; padding: 0;">
+                                                {% action_message_to_list entry as action_message_list %}
+                                                {% for action_message in action_message_list %}
+                                                    <li>{{ action_message.msg|style_bold_first_word }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <div>
+                        <i class="fa fa-clock bg-gray"></i>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

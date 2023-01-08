@@ -1,0 +1,55 @@
+{% load i18n static log jazzmin solo_tags %}
+{% get_jazzmin_ui_tweaks as jazzmin_ui %}
+
+{% get_side_menu using="app_list" as dashboard_list %}
+{% if dashboard_list %}
+    {% widthratio dashboard_list|length 2 1 as middle %}
+{% endif %}
+
+<div class="col-lg-9 col-12">
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            {% for app in dashboard_list %}
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="m-0">{{ app.name }}</h5>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-sm">
+                            <tbody>
+                            {% for model in app.models %}
+                                <tr>
+                                    <td>
+                                        {% if model.url %}<a href="{{ model.url }}">{{ model.name }}</a>{% else %}{{ model.name }}{% endif %}
+                                    </td>
+                                    <td>
+                                        <div class="btn-group float-right">
+                                            {% if model.add_url %}
+                                                <a href="{{ model.add_url }}" class="btn btn-xs btn-outline-primary addlink">{% trans 'Add' %}</a>
+                                            {% endif %}
+                                            {% if model.url %}
+                                                {% if model.view_only %}
+                                                    <a href="{{ model.url }}" class="btn btn-xs btn-outline-info viewlink">{% trans 'View' %}</a>
+                                                {% else %}
+                                                    <a href="{{ model.url }}" class="btn btn-xs btn-outline-info changelink">{% if model.custom %}{% trans 'Go' %}{% else %}{% trans 'Change' %}{% endif %}</a>
+                                                {% endif %}
+                                            {% endif %}
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                {% if forloop.counter == middle|add:"0" %}
+                </div>
+                <div class="col-md-6 col-sm-12">
+                {% endif %}
+
+            {% endfor %}
+            </div>
+    </div>
+
+</div>

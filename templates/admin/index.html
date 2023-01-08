@@ -1,0 +1,51 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static log jazzmin solo_tags %}
+{% get_jazzmin_ui_tweaks as jazzmin_ui %}
+
+{% block extrastyle %}
+{{ block.super }}
+{% endblock %}
+
+{% block extrahead %}
+{% endblock %}
+
+{% block bodyclass %}{{ block.super }} dashboard{% endblock %}
+
+{% block content_title %} {% trans 'Dashboard' %} {% endblock %}
+
+{% block breadcrumbs %}
+<ol class="breadcrumb float-sm-right">
+        <li class="breadcrumb-item"><a href="{% url 'admin:index' %}"><i class="fa fa-tachometer-alt">&nbsp;</i>{% trans 'Home' %}</a></li>
+    <li class="breadcrumb-item">{% trans 'Dashboard' %}</li>
+</ol>
+{% endblock %}
+
+
+{% block content %}
+<div class="col-12">
+    <div class="row">
+    
+        {% url 'admin:index' as index_view %}
+        {% if request.path == index_view %}
+            <!-- You can write the code for Dashboard Page here -->
+        {% endif %}
+
+        <div class="col-12 mb-3 mt-4">
+            <span class="h4">Apps & Modules</span>
+        </div>
+        
+        {% include "admin/dashboard_list.html" %}
+        {% include "admin/recent_actions.html" %}
+
+    </div>
+</div>
+{% endblock %}
+
+
+{% block extrajs %}
+<script>
+    $(document).ready(function () {
+        $(".sidebar .nav-link.active").focus();
+    });
+</script>
+{% endblock %}

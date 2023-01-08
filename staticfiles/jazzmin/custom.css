@@ -1,0 +1,94 @@
+@media only screen and (max-width: 992px) {
+  .content-wrapper > .content {
+    padding: 1rem 0rem;
+  }
+}
+
+.content-wrapper > .content {
+  padding: 1rem 0.5rem;
+}
+
+.login-box .login-logo img {
+  height: 7rem;
+}
+
+#jazzy-logo.brand-link {
+  display: flex;
+  align-items: center;
+  place-content: center;
+}
+
+#jazzy-logo.brand-link img {
+  box-shadow: none !important;
+  margin-left: 0;
+  margin-right: 2px;
+  max-height: 20rem;
+  height: 10rem;
+}
+
+@media (min-width: 992px) {
+  .sidebar-mini.sidebar-collapse.layout-fixed .brand-link {
+    place-content: inherit !important;
+  }
+
+  .sidebar-collapse #jazzy-logo.brand-link img {
+    height: 3.6rem;
+  }
+}
+
+.nav-sidebar > .nav-item > .nav-link.active > i.nav-icon {
+  color: #fff;
+}
+
+nav ul.nav-sidebar {
+  margin-bottom: 6rem;
+}
+
+.nav-link.active:focus-visible {
+  outline: none !important;
+}
+
+.form-group {
+  margin-top: 8px;
+}
+
+.elevation-4 {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24) !important;
+}
+
+.user-panel .image img {
+  padding: 4px;
+}
+
+.user-panel .info a {
+  font-weight: bolder;
+}
+
+.content-wrapper {
+  min-height: 100vh !important;
+}
+
+.btn-django_boilerplate {
+  background-color: #f7f7f7;
+  color: #000;
+  border: 1px solid #000;
+  border-radius: 0;
+}
+
+.card.card-primary.card-outline {
+  border-top: 3px solid #373a3c;
+}
+
+.btn-group {
+  white-space: nowrap;
+}
+
+.card {
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.card-header {
+  background-color: #ededed;
+  border-bottom: none !important;
+}
