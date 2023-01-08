@@ -1,4 +1,5 @@
 # Django Boilerplate
+![Cover](https://user-images.githubusercontent.com/34805677/211187662-414d5682-87c6-49c3-942e-333b02cb5a11.png)
 
 > Django Boilerplate consists of Django and other commonly used open source third party django libraries.
 
