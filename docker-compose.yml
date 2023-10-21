@@ -1,5 +1,7 @@
 version: "3.9"
 
+# Uncomment the database and Celery parts if you need in your project.
+
 services:
   # postgres:
   #   image: "postgis/postgis:16-3.4-alpine"
