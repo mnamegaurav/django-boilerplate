@@ -1,3 +1,1 @@
 import os
-
-PROJECT_EMPLOYEE_ID_LENGTH = int(os.getenv("PROJECT_EMPLOYEE_ID_LENGTH", 6))
