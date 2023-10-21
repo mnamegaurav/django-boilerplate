@@ -36,19 +36,6 @@ We build this boilerplate on the shoulders of popular & robust third party libra
    docker-compose up
    ```
 
-6. Execute these post installation commands.
-
-   ```bash
-   sudo docker-compose exec django python manage.py makemigrations
-   ```
-   ```bash
-   sudo docker-compose exec django python manage.py migrate
-   ```
-
-   ```bash
-   sudo docker-compose exec django python manage.py collectstatic
-   ```
-
 7. Now you are ready to go:
 
    - Run the django application from this link: [localhost:8000](http://localhost:8000)

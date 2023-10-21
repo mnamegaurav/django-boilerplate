@@ -19,20 +19,18 @@ from django.utils.translation import gettext_lazy as _
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Read dotenv file
-dotenv_file = os.path.join(BASE_DIR, ".env")
+dotenv_file = os.path.join(BASE_DIR, "../.env")
 if os.path.isfile(dotenv_file):
     dotenv.load_dotenv(dotenv_file)
-else:
-    dotenv.load_dotenv(os.path.join(BASE_DIR, ".env.example"))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/stable/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = os.getenv("SECRET_KEY", "secretkey")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG") == "True"
+DEBUG = os.getenv("DEBUG", False)
 
 # Application definition
 
@@ -81,6 +79,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.contrib.admindocs.middleware.XViewMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = "main.urls"
@@ -89,7 +88,7 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
-            BASE_DIR / "templates",
+            BASE_DIR / "../templates",
         ],
         "APP_DIRS": True,
         "OPTIONS": {
@@ -146,14 +145,14 @@ AUTH_USER_MODEL = "accounts.User"
 
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "static"
-STATICFILES_DIRS = (BASE_DIR / "staticfiles",)
+STATICFILES_DIRS = (BASE_DIR / "../staticfiles",)
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
-FIXTURE_DIRS = (BASE_DIR / "fixtures",)
+FIXTURE_DIRS = (BASE_DIR / "../fixtures",)
 
-LOCALE_PATHS = (BASE_DIR / "locale",)
+LOCALE_PATHS = (BASE_DIR / "../locale",)
 
 LANGUAGES = [
     ("en", _("English")),
@@ -164,20 +163,22 @@ LANGUAGES = [
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+SITE_ID = 1
+
 STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
 
 # EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 # EMAIL_FILE_PATH = 'tmp/emails'
 EMAIL_BACKEND = os.getenv("EMAIL_BACKEND")
-EMAIL_HOST = os.getenv("EMAIL_HOST")
-EMAIL_PORT = os.getenv("EMAIL_PORT")
-EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+EMAIL_HOST = os.getenv("EMAIL_HOST", "smtp.gmail.com")
+EMAIL_PORT = os.getenv("EMAIL_PORT", 587)
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "verification@example.in")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "")
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "webmaster@localhost")
 SERVER_EMAIL = os.getenv("SERVER_EMAIL", "root@localhost")
 
-ADMINS = (("Django Boilerplate", "contact@django_boilerplate.in"),)
+ADMINS = (("Django Boilerplate", "contact@example.in"),)
 
 
 DB_BACKEND_CONFIGS = {
@@ -203,7 +204,7 @@ DB_BACKEND_CONFIGS = {
     },
 }
 
-DATABASES = {"default": DB_BACKEND_CONFIGS.get(os.getenv("DB_BACKEND_NAME"))}
+DATABASES = {"default": DB_BACKEND_CONFIGS.get(os.getenv("DB_BACKEND_NAME", "sqlite3"))}
 
 
 if DEBUG:

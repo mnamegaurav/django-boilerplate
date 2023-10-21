@@ -1,0 +1,79 @@
+version: "3.9"
+
+services:
+  # postgres:
+  #   image: "postgis/postgis:16-3.4-alpine"
+  #   restart: always
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   env_file:
+  #     - ./.env
+
+  django:
+    build: .
+    image: backend-django
+    volumes:
+      - static_volume:/static
+      - media_volume:/media
+      - .:/code
+    ports:
+      - 8000:8000
+    # depends_on:
+    #   - postgres
+    env_file:
+      - ./.env
+    restart: always
+    command: python manage.py runserver 0.0.0.0:8000
+
+  django-commands:
+    image: backend-django
+    command:
+      - /bin/sh
+      - -c
+      - |
+        python manage.py makemigrations
+        python manage.py migrate --noinput
+        python manage.py collectstatic --noinput
+        python manage.py createsuperuser --noinput
+    volumes:
+      - .:/code
+    depends_on:
+      # - postgres
+      - django
+
+  # celery:
+  #   restart: always
+  #   image: backend-django
+  #   command: celery -A main --workdir backend worker -l info &&
+  #   depends_on:
+  #     - postgres
+  #     - django
+  #   volumes:
+  #     - .:/code
+
+  # celery-beat:
+  #   image: backend-django
+  #   command: celery -A main --workdir backend beat -l info
+  #   volumes:
+  #     - .:/code
+  #   depends_on:
+  #     - postgres
+  #     - django
+
+  # redis:
+  #   image: redis:7.2-alpine
+  #   restart: always
+  #   ports:
+  #     - "6379:6379"
+  #   volumes:
+  #     - redis_data:/data
+  #   env_file:
+  #     - ./.env
+
+volumes:
+  # postgres_data:
+  # redis_data:
+  static_volume:
+  media_volume:

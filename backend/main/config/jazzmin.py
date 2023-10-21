@@ -133,7 +133,6 @@ JAZZMIN_SETTINGS = {
     "navigation_expanded": False,
     # Hide these apps when generating side menu e.g (auth)
     "hide_apps": [
-        # 'django_celery_beat', ## TODO Hide this app
         "socialaccount",
     ],
     # Hide these models when generating side menu (e.g auth.user)
@@ -170,7 +169,6 @@ JAZZMIN_SETTINGS = {
         "settings": "fas fa-tools",
         "sites": "fas fa-sitemap",
         "socialaccount": "fas fa-user-friends",
-        "django_celery_beat": "fas fa-clock",
         # Models
         "auth": "fas fa-users-cog",
         "auth.Group": "fas fa-users",
@@ -182,11 +180,6 @@ JAZZMIN_SETTINGS = {
         "socialaccount.SocialAccount": "fas fa-user-friends",
         "socialaccount.SocialToken": "fas fa-mobile",
         "socialaccount.SocialApp": "fas fa-key",
-        "django_celery_beat.ClockedSchedule": "fas fa-clock",
-        "django_celery_beat.CrontabSchedule": "fas fa-stopwatch",
-        "django_celery_beat.IntervalSchedule": "fas fa-hourglass",
-        "django_celery_beat.PeriodicTask": "fas fa-user-clock",
-        "django_celery_beat.SolarSchedule": "fas fa-sun",
     },
     # Icons that are used when one is not manually specified
     "default_icon_parents": "fas fa-satellite-dish",

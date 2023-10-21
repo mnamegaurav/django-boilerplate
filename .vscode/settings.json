@@ -1,14 +1,5 @@
 {
-    "python.linting.pylintEnabled": false,
-    "python.linting.flake8Enabled": true,
-    "python.linting.pycodestyleEnabled": true,
-    "python.formatting.provider": "black",
-    "python.linting.enabled": false,
     "python.testing.promptToConfigure": false,
-    "python.analysis.logLevel": "Trace",
-    "python.linting.flake8Args": [
-        "--max-line-length=120"
-    ],
     "files.associations": {
         "**/*.html": "html",
         "**/templates/**/*.html": "django-html",
@@ -22,5 +13,8 @@
     },
     "[django-html]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
     },
 }
